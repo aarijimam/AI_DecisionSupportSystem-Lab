@@ -13,7 +13,7 @@ class Complex:
 
 
 if __name__ == '__main__':
-    num1 = Complex(1,2)
+    num1 = Complex(3,5)
     print(num1.mag())
     print(num1.orient())
    
