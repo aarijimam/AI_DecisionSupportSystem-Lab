@@ -20,24 +20,39 @@ class DirectedGraph:
                 inDegree += 1
         return (len(self.graph[vertex]), inDegree)
     
-    def find_path(self, start_vertex, end_vertex, path=None):
-        if path is None:
-            path = []
-
-        path = path + [start_vertex]
+   
+    def find_path(self, start_vertex, end_vertex):
+        path = []
+        stack = [(start_vertex, [start_vertex])]
         
-        if start_vertex == end_vertex:
-            return path
-        
-        if start_vertex not in self.graph:
-            return None
+        while stack:
+            (vertex, current_path) = stack.pop()
+            
+            if vertex == end_vertex:
+                return current_path
+            
+            for neighbor in self.graph[vertex]:
+                if neighbor not in current_path:
+                    stack.append((neighbor, current_path + [neighbor]))
+                    
+        return None
 
-        for neighbor in self.graph[start_vertex]:
-            if neighbor not in path:  
-                new_path = self.find_path(neighbor, end_vertex, path)
-                if new_path:
-                    return new_path
-        return None 
+    
+    def find_all_paths(self, start_vertex, end_vertex):
+        all_paths = []
+        stack = [(start_vertex, [start_vertex])]
+        
+        while stack:
+            (vertex, current_path) = stack.pop()
+            
+            if vertex == end_vertex:
+                all_paths.append(current_path)
+            else:
+                for neighbor in self.graph[vertex]:
+                    if neighbor not in current_path:
+                        stack.append((neighbor, current_path + [neighbor]))
+        
+        return all_paths
     
     
     
@@ -73,5 +88,14 @@ if __name__ == "__main__":
 
     if path:
         print(f"Path between {start_vertex} and {end_vertex}: {path}")
+    else:
+        print(f"No path found between {start_vertex} and {end_vertex}")
+        
+    all_paths = g.find_all_paths(start_vertex, end_vertex)
+
+    if all_paths:
+        print(f"All paths between {start_vertex} and {end_vertex}:")
+        for path in all_paths:
+            print(path)
     else:
         print(f"No path found between {start_vertex} and {end_vertex}")
