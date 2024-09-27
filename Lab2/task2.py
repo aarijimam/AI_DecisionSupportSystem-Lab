@@ -78,24 +78,15 @@ if __name__ == "__main__":
 
     print("Graph structure:", g.graph)
 
-    vertex = 'E'
-    out_degree, in_degree = g.get_degree(vertex)
-    print(f"Vertex {vertex} - Out Degree: {out_degree}, In Degree: {in_degree}")
+    for x in g.graph:
+        out_degree, in_degree = g.get_degree(x)
+        print(f"{x}:OutDegree: {out_degree}, InDegree: {in_degree}")
     
     start_vertex = 'A'
     end_vertex = 'F'
     path = g.find_path(start_vertex, end_vertex)
-
-    if path:
-        print(f"Path between {start_vertex} and {end_vertex}: {path}")
-    else:
-        print(f"No path found between {start_vertex} and {end_vertex}")
+    print(f"path: {path}")
         
     all_paths = g.find_all_paths(start_vertex, end_vertex)
 
-    if all_paths:
-        print(f"All paths between {start_vertex} and {end_vertex}:")
-        for path in all_paths:
-            print(path)
-    else:
-        print(f"No path found between {start_vertex} and {end_vertex}")
+    print(f"all paths: {all_paths}")
