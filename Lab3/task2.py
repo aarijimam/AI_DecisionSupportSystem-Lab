@@ -1,4 +1,4 @@
-
+from collections import deque
 class Tree:
     def __init__(self, data=None):
         self.data = data
@@ -10,14 +10,12 @@ def bfs(root):
     if root is None:
         return []
 
-    queue = [root]
-    bfs_order = []
+    queue = deque([root])
+    order = []
     
     while queue:
-        current_node = queue.pop(0)
-        
-        bfs_order.append(current_node.data)
-        
+        current_node = queue.popleft()
+        order.append(current_node.data)
         if current_node.left:
             queue.append(current_node.left)
         if current_node.middle:
@@ -25,7 +23,7 @@ def bfs(root):
         if current_node.right:
             queue.append(current_node.right)
     
-    return bfs_order
+    return order
 
 
 root = Tree(1)

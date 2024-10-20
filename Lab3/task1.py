@@ -139,18 +139,18 @@ class UndirectedGraph:
     def bfs(self, start):
         visited = set()
         queue = deque([start])
-        bfs_order = []
+        order = []
 
         while queue:
             vertex = queue.popleft()
             if vertex not in visited:
                 visited.add(vertex)
-                bfs_order.append(vertex)
+                order.append(vertex)
                 for neighbor in self.graph[vertex]:
                     if neighbor not in visited:
                         queue.append(neighbor)
 
-        return bfs_order
+        return order
 
         
 
